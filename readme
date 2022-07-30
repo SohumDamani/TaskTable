@@ -1,1 +1,1 @@
-Install django-crispy-forms
+$ pip install -r requirement.txt
