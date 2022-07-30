@@ -1,1 +1,3 @@
-pip install django-crispy-forms
+django
+django-crispy-forms
+
