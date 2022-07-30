@@ -1,0 +1,51 @@
+
+a{
+    margin:0px;
+    padding:0px;
+}
+.content{
+    display:flex;
+    flex-direction:column;
+    justify-content:left;
+}
+.custom_form{
+    max-width:500px;
+    width:auto;
+    margin: 50px auto;
+    background:lightgray;
+    padding:10px;
+}
+.form-row2{
+    display:flex;
+    justify-content:space-between;
+}
+.form-row3{
+    display:flex;
+    justify-content:space-between;
+}
+.form-submit{
+    margin:32px 0px;
+    width:70%;
+    height:auto;
+}
+
+.table{
+    border: 2px solid black;
+}
+
+.table-title{
+    display:flex;
+    gap: 1em;
+    align-items:center;
+    margin:auto 0px;
+    max-height:100px;
+    min-height:40px;
+}
+.table-title a{
+    color:white;
+}
+.arrow{
+    display:flex ;
+    flex-direction:column;
+
+}

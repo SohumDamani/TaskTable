@@ -1,0 +1,31 @@
+{% extends 'homepage.html' %}
+
+{% block content %}
+<body>
+    {% load crispy_forms_tags %}
+    <div class="custom_form">
+        <form method="POST">
+            <!-- Security token -->
+            {% csrf_token %}
+            {% if form.errors %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+            {% endif %}
+                {{form.title|as_crispy_field}}
+                <div class="form-row2" >
+                    {{form.start_date|as_crispy_field}}
+                    {{form.end_date|as_crispy_field}}
+                </div>
+                <div class="form-row3">
+                    {{form.priority|as_crispy_field}}
+                    <button class="form-submit btn btn-success" type="submit" >Submit</button>
+
+                </div>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

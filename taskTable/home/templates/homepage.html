@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+    <!--    Bootstrap   -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://kit.fontawesome.com/5c05174ec4.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+{% if messages %}
+{% for message in messages %}
+<div class="container alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">
+        ×
+    </button>
+    <strong>{{message}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<div class="container content">
+    
+    <div>
+        {% block content %}
+            <button type="submit" class="btn btn-success btn-lg btn-block"
+                    onclick="location.href = '{% url 'create_task' %}'"
+                    style='margin:10px 0px;max-width:200px;text-align:center;'>
+                Add Task
+            </button>
+        {% endblock %}
+    </div>
+    
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col"><div class="table-title">Id</div></th>
+            <th scope="col"><div class="table-title">Title</div></th>
+            <th scope="col">
+                <div class="table-title">
+                    Start Date and Time
+                    <div class="arrow">
+                        <a href="{% url 'sort_table' 'start_date' 1 %}"><i
+                                class="fa fa-solid fa-caret-up fa-lg"></i></a>
+                        <a href="{% url 'sort_table' 'start_date' 0 %}"><i
+                                class="fa fa-solid fa-caret-down fa-lg"></i></a>
+                    </div>
+                </div>
+            
+            </th>
+            <th scope="col">
+                <div class="table-title">
+                    End Date and Time
+                    <div class="arrow">
+                        <a href="{% url 'sort_table' 'end_date' 1 %}"><i
+                                class="fa fa-solid fa-caret-up fa-lg"></i></a>
+                        <a href="{% url 'sort_table' 'end_date' 0 %}"><i
+                                class="fa fa-solid fa-caret-down fa-lg"></i></a>
+                    </div>
+                </div>
+            </th>
+            <th scope="col">
+                <div class="table-title">
+                    Priority
+                    <div class="arrow">
+                        <a href="{% url 'sort_table' 'priority' 1 %}"><i
+                                class="fa fa-solid fa-caret-up fa-lg"></i></a>
+                        <a href="{% url 'sort_table' 'priority' 0 %}"><i
+                                class="fa fa-solid fa-caret-down fa-lg"></i></a>
+                    </div>
+                </div>
+            </th>
+            <th scope="col">
+                <div class="table-title">
+                    Status
+                    <div class="arrow">
+                        <a href="{% url 'sort_table' 'status' 1 %}"><i
+                                class="fa fa-solid fa-caret-up fa-lg"></i></a>
+                        <a href="{% url 'sort_table' 'status' 0 %}"><i
+                                class="fa fa-solid fa-caret-down fa-lg"></i></a>
+                    </div>
+                </div>
+            </th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in contents %}
+        <tr>
+            <th>{{forloop.counter}}</th>
+            <th>{{task.title}}</th>
+            <th>{{task.start_date}}</th>
+            <th>{{task.end_date}}</th>
+            <th>{{task.priority}}</th>
+            <th><a href="{% url 'update_status' task.id %}">
+                {% if task.status == 'Completed' %}
+                <div style="color:green;">{{task.status}}</div>
+                {% else %}
+                <div style="color:indigo;">{{task.status}}</div>
+                {% endif %}
+                </a>
+            </th>
+            <th><a href="{% url 'delete_task' task.id %}">
+                <button type="button" class="btn btn-outline-danger"
+                onclick="return confirm('Are you sure?');">
+                    Delete
+                </button>
+            </a>
+            
+            </th>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
